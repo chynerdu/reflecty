@@ -68,4 +68,18 @@ class PostService {
       // return false;
     });
   }
+
+  // delete post
+  static Future<dynamic> deletePost(deletedPostId) async {
+    // _isLoading = true;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var userId = prefs.getString('userId');
+    var url = Uri.parse(
+        'https://reflecty-2a4da-default-rtdb.firebaseio.com/posts/$userId/$deletedPostId.json');
+    return http.delete(url).then((http.Response response) {
+      return true;
+    }).catchError((error) {
+      return false;
+    });
+  }
 }

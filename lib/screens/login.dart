@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:abccompany/components/firstButton.dart';
+import 'package:abccompany/constants/styles.dart';
 import 'package:abccompany/screens/home/posts.dart';
 import 'package:abccompany/screens/register.dart';
 import 'package:abccompany/services/auth.dart';
@@ -108,7 +109,10 @@ class _Login extends State<Login> {
         padding: EdgeInsets.only(bottom: 30, left: 20, right: 20),
         child: Column(
           children: <Widget>[
-            Text('Glad to have you'),
+            Text('Login', style: Styles.headerStyle),
+            SizedBox(height: 10),
+            Text('Welcome back, log into your account',
+                textAlign: TextAlign.center, style: Styles.subHeaderStyle),
             SizedBox(height: 20),
           ],
         ));

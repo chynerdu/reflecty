@@ -35,6 +35,29 @@ class PostScreenState extends State<PostScreen> {
     posts = response['data'];
   }
 
+  deletePost(postId) async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    var response = await PostService.deletePost(postId);
+    setState(() {
+      _isLoading = false;
+    });
+    print('response $response');
+    if (response == true) {
+      showSnackbar('Post Deleted');
+      new Future.delayed(const Duration(seconds: 2), () => fetchPosts());
+    } else {
+      showSnackbar('Unable to delete post');
+    }
+  }
+
+  showSnackbar(message) {
+    final _snackBar = SnackBar(content: Text('$message'));
+    _drawerKey.currentState!.showSnackBar(_snackBar);
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         key: _drawerKey,
@@ -67,6 +90,12 @@ class PostScreenState extends State<PostScreen> {
                         leading: CircleAvatar(),
                         title: Text('${post.title}'),
                         subtitle: Text('${post.description}'),
+                        trailing: GestureDetector(
+                            onTap: () {
+                              deletePost(post.id);
+                            },
+                            child: Icon(Icons.delete_forever,
+                                color: Colors.red, size: 17)),
                       );
                     }),
                   ));

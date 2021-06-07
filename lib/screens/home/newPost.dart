@@ -120,7 +120,9 @@ class NewPostState extends State<NewPost> {
                         ),
                         SizedBox(height: 40),
                         TextFormField(
+                          maxLines: 3,
                           style: TextStyle(
+
                               // color: Colors.black,
                               ),
                           decoration: InputDecoration(
